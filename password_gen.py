@@ -1,84 +1,57 @@
-import string 
 import random
+import string
+import math
 
 def listtostring(s):
- 
-    str1 = ""
- 
-    for ele in s:
-        str1 += str(ele)
- 
-    return str1
 
+  str1 = ""
 
-length = int(input("How long would you like the password to be"))
+  for ele in s:
+    str1 += str(ele)
 
-lnum = random.randint(3, 7) - 1
+  return str1
 
-count1 = length - lnum
-
-inum = random.randint(3, count1 - 4)
-
-snum = count1 - inum
-
-print("lnum = " + str(lnum))
-
-print("inum = " + str(inum))
-
-print("snum = " + str(snum))
-
-ri = 0
-
-count = 14
-
-passlength = length
-
-letters = list(string.ascii_lowercase)
-
-numbers = [i for i in range(10)]
-
-for i in range(0,9):
-        numbers[i] = str(numbers[i])
-
-symbols = ["|", "`", "<", ">", ",", ".", "?", "/", "~", "@", "#", ":", ";", "}", "{", "]", "[", "!", "$", "%", "^", "&", "*", "(", ")", "_", "+", "="]
-
-all = letters + numbers + symbols
-
-print(all)
 
 password = []
+num = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+let = list(string.ascii_lowercase)
+sym = [
+  "|", "`", "<", ">", ",", ".", "?", "/", "~", "@", "#", ":", ";", "}", "{",
+  "]", "[", "!", "$", "%", "^", "&", "*", "(", ")", "_", "+", "="
+]
+length = int(input("Enter a password length of 9+\n"))
+while length < 9:
+  print("Try again\n")
+  length = int(input())
+length = length + 1
+snum = random.randint(int(length * 0.33 - 1.0), int(length * 0.33))
+snum = int(snum)
+inum = length - snum - length / 3
+lnum = length - snum - inum
 
-for i in range(0,length):
-    ri = random.randint(0, count)
-    password.append(all[ri])
+lnum = int(lnum)
+inum = math.floor(inum)
 
-    if all[ri] in letters:
-            lnum = lnum - 1
+random.shuffle(let)
+random.shuffle(sym)
+random.shuffle(num)
 
-    if all[ri] in numbers:
-            inum = inum - 1
+while snum != 0:
+  password.append(sym[snum])
+  snum = snum - 1
 
-    if all[ri] in symbols:
-            snum = snum - 1
+while inum != 0:
+  password.append(num[inum])
+  inum = inum - 1
 
-    if lnum == 0:
-        for i in range(0, 25):
-            if letters[i] in all:
-                    all.remove(letters[i])
-
-    if inum == 0:
-        for i in range(0, 9):
-            if numbers[i] in all:
-                all.remove(numbers[i])
-
-    if snum == 0:
-        for i in range(0, 27):
-            if symbols[i] in all:
-                all.remove(symbols[i])
-
-    del all[ri]
-    count = count - 1
+while lnum != 0:
+  password.append(let[lnum])
+  lnum = lnum - 1
 
 random.shuffle(password)
-print(listtostring(password))
+random.shuffle(password)
+random.shuffle(password)
 
+passw = listtostring(password)
+
+print(passw)
