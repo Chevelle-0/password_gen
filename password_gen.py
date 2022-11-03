@@ -19,9 +19,13 @@ sym = [
   "|", "`", "<", ">", ",", ".", "?", "/", "~", "@", "#", ":", ";", "}", "{",
   "]", "[", "!", "$", "%", "^", "&", "*", "(", ")", "_", "+", "="
 ]
-length = int(input("Enter a password length of 9+\n"))
+
+print("Enter a password length of 9+")
+length = int(input("Length: "))
+
 while length < 9:
   print("Try again\n")
+  print("Lemgth: ")
   length = int(input())
 length = length + 1
 snum = random.randint(int(length * 0.33 - 1.0), int(length * 0.33))
@@ -54,4 +58,4 @@ random.shuffle(password)
 
 passw = listtostring(password)
 
-print(passw)
+print("Password: " + passw)
